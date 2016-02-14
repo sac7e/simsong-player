@@ -12,7 +12,30 @@ def hello_world():
 
 @app.route('/wangyi/<id>')
 def wangyi(id):
-    return render_template('wangyi.html',songurl=songurl, id=id)
+
+    headers = {
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip,deflate,sdch',
+        'Accept-Language': 'zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Host': 'music.163.com',
+        'Referer': 'http://music.163.com/search/',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) \
+        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36',
+    }
+
+    url = 'http://music.163.com/api/song/detail?ids=[' + id + ']'
+
+    try:
+        r = requests.get(url,headers=headers)
+    except:
+        return "no"
+
+    info = r.json()
+    resolved_url=info['songs'][0].get('mp3Url').replace('http://m','http://p')
+
+    return render_template('wangyi.html', resolved_url=resolved_url)
 
 
 def xiami_resolve(location):
@@ -44,6 +67,9 @@ def xiami(id):
     resolved_url=xiami_resolve(info['playlist']['trackList']['track'].get('location'))
 
     return render_template('xiami.html', resolved_url=resolved_url)
+
+
+
 
 
 

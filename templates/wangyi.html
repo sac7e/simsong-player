@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" hola_ext_inject="disabled">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="sac7e">
+    <title>"Xiami Music"</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <a href="#" id="play-pause" title="play-pause"><i class="fa fa-play"></i></a>
+    <audio src="{{ resolved_url }}" loop="true" preload="auto"></audio>
+    <br><i>Download Url:</i><b>{{ resolved_url }}</b>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script>
+      var audio = $("audio")[0];
+      $('#play-pause').click(function() {
+        if (audio.paused) {
+          audio.play();
+          $(this).html("<i class='fa fa-stop'></i>");
+        }
+        else {
+          audio.pause();
+          audio.currentTime=0;
+          $(this).html("<i class='fa fa-play'></i>");
+        }
+      });
+    </script>
+  </body>
+</html>
