@@ -10,7 +10,7 @@
   </head>
   <body>
     <a href="#" id="play-pause" title="play-pause"><i class="fa fa-play"></i></a>
-    <audio src="{{ resolved_url }}" preload="auto"></audio>
+    <audio src="{{ resolved_url }}" loop="true" preload="auto"></audio>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script>
       var audio = $("audio")[0];
